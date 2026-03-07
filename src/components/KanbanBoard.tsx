@@ -2,67 +2,64 @@ import { useState } from 'react';
 import { Box } from '@mui/material';
 import BoardHeader from './BoardHeader';
 import KanbanColumn from './KanbanColumn';
-import NewTaskDialog from './NewTaskDialog';
-import NewColumnDialog from './NewColumnDialog';
-import type { Column } from './types';
+import CreateTaskModal from './CreateTaskModal';
+import CreateColumnModal from './CreateColumnModal';
+import { type Column } from './types';
 
-// Dummy data using our types, just to see the design
-const MOCK_COLUMNS: Column[] = [
+// Real data structure based on types.ts
+const INITIAL_DATA: Column[] = [
   {
-    id: "c1",
-    title: "To Do",
+    id: 'c1',
+    title: 'To Do',
     tasks: [
-      { id: "t1", title: "Setup Database", description: "Create TODO li" },
-      { id: "t2", title: "Design UI", description: "Create Figma mockups" }
+      { id: 't1', title: 'Learn React', description: 'Understand components and props' },
+      { id: 't2', title: 'Learn Types', description: 'Use interfaces for data' }
     ]
   },
   {
-    id: "c2",
-    title: "In Progress",
-    tasks: [
-      { id: "t3", title: "Learn React", description: "Understand components" }
-    ]
+    id: 'c2',
+    title: 'Done',
+    tasks: []
   }
 ];
 
 export default function KanbanBoard() {
-  // UI State for opening/closing dialogs
-  const [isTaskDialogOpen, setIsTaskDialogOpen] = useState(false);
-  const [isColumnDialogOpen, setIsColumnDialogOpen] = useState(false);
+  // State for opening/closing modals (UI only)
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [isColumnModalOpen, setIsColumnModalOpen] = useState(false);
 
   return (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       
-      {/* Header */}
-      <BoardHeader onOpenAddColumn={() => setIsColumnDialogOpen(true)} />
+      {/* Header with trigger for Column Modal */}
+      <BoardHeader onOpenCreateColumn={() => setIsColumnModalOpen(true)} />
 
-      {/* Board Columns Area */}
+      {/* Columns Area */}
       <Box sx={{
         display: 'flex',
         gap: 3,
         padding: 3,
         flexGrow: 1,
-        backgroundColor: '#ffffff',
-        overflowX: 'auto'
+        backgroundColor: '#2f1ba1',
       }}>
-        {MOCK_COLUMNS.map((column) => (
+        {INITIAL_DATA.map((column) => (
           <KanbanColumn 
             key={column.id} 
             column={column} 
-            onOpenAddTask={() => setIsTaskDialogOpen(true)} 
+            onOpenCreateTask={() => setIsTaskModalOpen(true)} 
           />
         ))}
       </Box>
 
-      {/* Dialog Components (Hidden until their state is true) */}
-      <NewTaskDialog 
-        open={isTaskDialogOpen} 
-        onClose={() => setIsTaskDialogOpen(false)} 
+      {/* Hidden Modals (Popups) */}
+      <CreateTaskModal 
+        open={isTaskModalOpen} 
+        onClose={() => setIsTaskModalOpen(false)} 
       />
       
-      <NewColumnDialog 
-        open={isColumnDialogOpen} 
-        onClose={() => setIsColumnDialogOpen(false)} 
+      <CreateColumnModal 
+        open={isColumnModalOpen} 
+        onClose={() => setIsColumnModalOpen(false)} 
       />
 
     </Box>

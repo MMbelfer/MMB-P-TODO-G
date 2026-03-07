@@ -5,7 +5,7 @@ interface TaskCardProps {
   task: Task;
 }
 
-export function TaskCard({ task }: TaskCardProps) {
+export default function TaskCard({ task }: TaskCardProps) {
   return (
     <Card sx={{ marginBottom: 2 }}>
       <CardContent>

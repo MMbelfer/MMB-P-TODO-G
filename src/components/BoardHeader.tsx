@@ -1,27 +1,26 @@
 import { Box, Typography, TextField, Button } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
 
 interface BoardHeaderProps {
-  onOpenAddColumn: () => void;
+  onOpenCreateColumn: () => void;
 }
 
-export default function BoardHeader({ onOpenAddColumn }: BoardHeaderProps) {
+export default function BoardHeader({ onOpenCreateColumn }: BoardHeaderProps) {
   return (
     <Box sx={{
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
       padding: 2,
-      backgroundColor: '#f5f540',
-      borderBottom: '1px solid #4b2727',
+      backgroundColor: '#e98f8f',
+      borderBottom: '1px solid #07050c'
     }}>
-      <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-       The Git UglyDo
+      <Typography variant="h5">
+        My Git UglyDo
       </Typography>
 
       <Box sx={{ display: 'flex', gap: 2 }}>
         <TextField variant="outlined" size="small" placeholder="Search..." />
-        <Button variant="contained" disableElevation startIcon={<AddIcon />} onClick={onOpenAddColumn}>
+        <Button variant="contained" onClick={onOpenCreateColumn} disableElevation>
           Create Column
         </Button>
       </Box>
