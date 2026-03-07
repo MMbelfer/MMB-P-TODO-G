@@ -1,5 +1,3 @@
-
-
 import KanbanBoard from "./components/KanbanBoard";
 
 function App() {

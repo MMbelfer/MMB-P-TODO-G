@@ -1,14 +1,19 @@
 import { Card, CardContent, Typography } from '@mui/material';
+import type { Task } from './types';
 
-export default function TaskCard(props: { title: string, description: string }) {
+interface TaskCardProps {
+  task: Task;
+}
+
+export function TaskCard({ task }: TaskCardProps) {
   return (
     <Card sx={{ marginBottom: 2 }}>
       <CardContent>
-        <Typography variant="h6">
-          {props.title}
+        <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+          {task.title}
         </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {props.description}
+        <Typography variant="body2" color="text.secondary">
+          {task.description}
         </Typography>
       </CardContent>
     </Card>
