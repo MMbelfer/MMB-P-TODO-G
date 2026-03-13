@@ -1,40 +1,29 @@
 import { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import BoardHeader from './BoardHeader';
 import KanbanColumn from './KanbanColumn';
 import CreateTaskModal from './CreateTaskModal';
 import CreateColumnModal from './CreateColumnModal';
-import { type Column } from './types';
 
-// Real data structure based on types.ts
-const INITIAL_DATA: Column[] = [
-  {
-    id: 'c1',
-    title: 'To Do',
-    tasks: [
-      { id: 't1', title: 'Learn React', description: 'Understand components and props' },
-      { id: 't2', title: 'Learn Types', description: 'Use interfaces for data' }
-    ]
-  },
-  {
-    id: 'c2',
-    title: 'Done',
-    tasks: []
-  }
-];
+//ההוק הקסטמי
+import { useBoardData } from '../hooks/useBoardData';
 
-export default function KanbanBoard() {
-  // State for opening/closing modals (UI only)
+export default function KanbanBoard() 
+{  const { columns, isLoading } = useBoardData();
+
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [isColumnModalOpen, setIsColumnModalOpen] = useState(false);
+
+// הAI חושב שצריך תנאי המתנה
+  if (isLoading) {
+    return <Typography sx={{ color: 'white', p: 3 }}>Loading board data...</Typography>;
+  }
 
   return (
     <Box sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       
-      {/* Header with trigger for Column Modal */}
       <BoardHeader onOpenCreateColumn={() => setIsColumnModalOpen(true)} />
 
-      {/* Columns Area */}
       <Box sx={{
         display: 'flex',
         gap: 3,
@@ -42,7 +31,8 @@ export default function KanbanBoard() {
         flexGrow: 1,
         backgroundColor: '#2f1ba1',
       }}>
-        {INITIAL_DATA.map((column) => (
+    
+        {columns.map((column) => (
           <KanbanColumn 
             key={column.id} 
             column={column} 
@@ -51,16 +41,8 @@ export default function KanbanBoard() {
         ))}
       </Box>
 
-      {/* Hidden Modals (Popups) */}
-      <CreateTaskModal 
-        open={isTaskModalOpen} 
-        onClose={() => setIsTaskModalOpen(false)} 
-      />
-      
-      <CreateColumnModal 
-        open={isColumnModalOpen} 
-        onClose={() => setIsColumnModalOpen(false)} 
-      />
+      <CreateTaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} />
+      <CreateColumnModal open={isColumnModalOpen} onClose={() => setIsColumnModalOpen(false)} />
 
     </Box>
   );

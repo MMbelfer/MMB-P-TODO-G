@@ -1,0 +1,21 @@
+{
+  "columns": [
+    {
+      "id": "c1",
+      "title": "To Do",
+      "tasks": [
+        { "id": "t1", "title": "Learn React", "description": "Understand components and props" },
+        { "id": "t2", "title": "Learn Types", "description": "Use interfaces for data" }
+      ]
+    },
+    {
+      "id": "c2",
+      "title": "Done",
+      "tasks": []
+    }
+  ],
+  "user": {
+    "name": "Yosef",
+    "role": "Admin"
+  }
+}

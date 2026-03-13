@@ -11,3 +11,9 @@ export interface Column {
   title: string;
   tasks: Task[];
 }
+
+export interface User {
+  name: string;
+  role: string;
+  userid: string;
+}
