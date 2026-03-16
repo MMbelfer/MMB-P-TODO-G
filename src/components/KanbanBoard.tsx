@@ -4,17 +4,16 @@ import BoardHeader from './BoardHeader';
 import KanbanColumn from './KanbanColumn';
 import CreateTaskModal from './CreateTaskModal';
 import CreateColumnModal from './CreateColumnModal';
-
-//ההוק הקסטמי
 import { useBoardData } from '../hooks/useBoardData';
 
-export default function KanbanBoard() 
-{  const { columns, isLoading } = useBoardData();
+export default function KanbanBoard() {
+  const { columns, isLoading, fetchColumns } = useBoardData();
 
-  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  // במקום לשמור "האם המודאל פתוח (כן/לא)", נשמור את ה-ID של העמודה.
+  // אם הערך הוא null - המודאל סגור. אם יש ID - המודאל פתוח עבור העמודה הזו.
+  const [activeColumnId, setActiveColumnId] = useState<string | null>(null);
   const [isColumnModalOpen, setIsColumnModalOpen] = useState(false);
 
-// הAI חושב שצריך תנאי המתנה
   if (isLoading) {
     return <Typography sx={{ color: 'white', p: 3 }}>Loading board data...</Typography>;
   }
@@ -24,25 +23,27 @@ export default function KanbanBoard()
       
       <BoardHeader onOpenCreateColumn={() => setIsColumnModalOpen(true)} />
 
-      <Box sx={{
-        display: 'flex',
-        gap: 3,
-        padding: 3,
-        flexGrow: 1,
-        backgroundColor: '#2f1ba1',
-      }}>
-    
+      <Box sx={{ display: 'flex', gap: 3, padding: 3, flexGrow: 1, backgroundColor: '#2f1ba1' }}>
         {columns.map((column) => (
           <KanbanColumn 
             key={column.id} 
             column={column} 
-            onOpenCreateTask={() => setIsTaskModalOpen(true)} 
+            // כעת כשאנחנו לוחצים על הפלוס בעמודה, אנחנו שומרים איזה עמודה זו!
+            onOpenCreateTask={() => setActiveColumnId(column.id)} 
           />
         ))}
       </Box>
 
-      <CreateTaskModal open={isTaskModalOpen} onClose={() => setIsTaskModalOpen(false)} />
-      <CreateColumnModal open={isColumnModalOpen} onClose={() => setIsColumnModalOpen(false)} />
+      <CreateTaskModal 
+        columnId={activeColumnId} 
+        onClose={() => setActiveColumnId(null)} 
+        onSuccess={fetchColumns} 
+      />
+      <CreateColumnModal 
+        open={isColumnModalOpen} 
+        onClose={() => setIsColumnModalOpen(false)} 
+        onSuccess={fetchColumns}
+      />
 
     </Box>
   );

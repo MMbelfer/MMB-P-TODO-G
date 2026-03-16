@@ -4,18 +4,32 @@
       "id": "c1",
       "title": "To Do",
       "tasks": [
-        { "id": "t1", "title": "Learn React", "description": "Understand components and props" },
-        { "id": "t2", "title": "Learn Types", "description": "Use interfaces for data" }
+        {
+          "id": "t1",
+          "title": "Learn React",
+          "description": "Understand components and props"
+        },
+        {
+          "id": "t2",
+          "title": "Learn Types",
+          "description": "Use interfaces for data"
+        }
       ]
     },
     {
       "id": "c2",
       "title": "Done",
       "tasks": []
+    },
+    {
+      "id": "col-1773682178962",
+      "title": "משיח",
+      "tasks": []
     }
   ],
   "user": {
     "name": "Yosef",
     "role": "Admin"
-  }
+  },
+  "$schema": "./node_modules/json-server/schema.json"
 }

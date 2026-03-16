@@ -2,21 +2,24 @@ import { useState, useEffect } from 'react';
 import { apiClient } from '../api/client';
 import { type Column } from '../components/types';
 
-
 export const useBoardData = () => {
-  // הסטיט
   const [columns, setColumns] = useState<Column[]>([]);
-  const [isLoading, setIsLoading] = useState(true); //הAI החליט שכדי לטעון גם
+  const [isLoading, setIsLoading] = useState(true);
 
-  //המתנה
-  useEffect(() => {
+
+  const fetchColumns = () => {
     apiClient.get('/columns')
       .then((response) => {
         setColumns(response.data);
         setIsLoading(false); 
       });
+  };
+
+ 
+  useEffect(() => {
+    fetchColumns();
   }, []);
 
 
-  return { columns, isLoading };
+  return { columns, isLoading, fetchColumns };
 };
