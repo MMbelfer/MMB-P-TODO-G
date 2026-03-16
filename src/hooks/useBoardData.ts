@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { apiClient } from '../api/client';
 import { type Column } from '../components/types';
+
 
 export const useBoardData = () => {
   // הסטיט
@@ -9,7 +10,7 @@ export const useBoardData = () => {
 
   //המתנה
   useEffect(() => {
-    axios.get('http://localhost:3000/columns')
+    apiClient.get('/columns')
       .then((response) => {
         setColumns(response.data);
         setIsLoading(false); 
