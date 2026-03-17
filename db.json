@@ -2,29 +2,36 @@
   "columns": [
     {
       "id": "c1",
-      "title": "To Do",
-      "tasks": [
-        {
-          "id": "t1",
-          "title": "Learn React",
-          "description": "Understand components and props"
-        },
-        {
-          "id": "t2",
-          "title": "Learn Types",
-          "description": "Use interfaces for data"
-        }
-      ]
+      "title": "To Do"
     },
     {
       "id": "c2",
-      "title": "Done",
-      "tasks": []
+      "title": "Done"
     },
     {
-      "id": "col-1773682178962",
-      "title": "משיח",
+      "id": "col-1773718412019",
+      "title": "להתחיל להבין ריאקט",
       "tasks": []
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "Learn React",
+      "description": "Understand components and props",
+      "columnId": "c1"
+    },
+    {
+      "id": "t2",
+      "title": "Learn Types",
+      "description": "Use interfaces for data",
+      "columnId": "c1"
+    },
+    {
+      "id": "task-1773719108783",
+      "title": "מבנה ריאקט",
+      "description": "TS",
+      "columnId": "col-1773718412019"
     }
   ],
   "user": {

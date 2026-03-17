@@ -1,11 +1,10 @@
-// Define what a Task looks like
 export interface Task {
   id: string;
   title: string;
   description: string;
+  columnId?: string; // הקישור לעמודה
 }
 
-// Define what a Column looks like
 export interface Column {
   id: string;
   title: string;
